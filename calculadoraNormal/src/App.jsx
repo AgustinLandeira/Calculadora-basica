@@ -1,12 +1,19 @@
 import { useState } from 'react'
 import './App.css'
 
-const BottonNumbers = ({children,updateDisplay}) => {
+const BottonNumbers = ({children,updateDisplay,showResult}) => {
 
   const handleClick = () =>{
 
     updateDisplay(children)
   }
+
+  const click = () =>{
+
+    showResult() 
+  }
+
+  if(children === "=") return <button onClick={click}>{children}</button>
 
 
     return <button onClick={handleClick}>{children}</button>
@@ -27,13 +34,13 @@ const Operators = ({numberPassed,updateDisplay}) =>{
   }else if(numberPassed === 5){
 
     operator = "/";
-    return <button className='operator'>/</button>
+    return <button className='operator' onClick={handleClick}>/</button>
 
   }else if(numberPassed === 8){
     operator = "+";
-    return <button className='operator'>+</button>
+    return <button className='operator' onClick={handleClick}>+</button>
 
-  }else if(numberPassed == "."){
+  }else if(numberPassed == "="){
     operator = "-";
     return <button className='operator'>-</button>
   }
@@ -45,7 +52,13 @@ const Operators = ({numberPassed,updateDisplay}) =>{
 //creamos nueve espacios vacios y despues le decimos que lo vamos a rellenar
 //.map((_, index) => index) usamos el segundo param del map para usar sus indices como valores
 
-const keys = Array(11).fill().map((__,index) => index === 10 ? "." : index);
+const keys = Array(12).fill().map((__,index) => {
+
+  if(index == 10)return "."
+  else if(index == 11) return "="
+
+  return index
+});
 
 
 function App() {
@@ -58,6 +71,24 @@ function App() {
 
     setResult(number)
     
+  }
+
+  const showResult = () =>{
+
+    let numbers = [];
+
+    if(number.includes("x")){
+      
+      numbers = number.split("x");
+
+      let newNumber = numbers[0] * numbers[1];
+
+      
+      console.log(numbers)
+      setNumber(newNumber)
+
+      setResult(newNumber)
+    }
   }
 
   const [result,setResult] = useState("0")
@@ -76,8 +107,8 @@ function App() {
           return (
             <>
 
-            <BottonNumbers className="Number" key={index} updateDisplay={showDisplay}>{index}</BottonNumbers>
-            <Operators numberPassed={index} updateDisplay={showDisplay}></Operators>
+            <BottonNumbers className="Number" key={index} updateDisplay={showDisplay} showResult={showResult}>{index}</BottonNumbers>
+            <Operators numberPassed={index} updateDisplay={showDisplay} ></Operators>
           
           </>
           )
