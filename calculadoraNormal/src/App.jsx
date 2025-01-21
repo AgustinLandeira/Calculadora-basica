@@ -13,6 +13,7 @@ const BottonNumbers = ({children,updateDisplay,showResult}) => {
     showResult() 
   }
 
+  //si el children tiene este valor = este boton tendra otra funcion(mostrara el resultado)
   if(children === "=") return <button onClick={click}>{children}</button>
 
 
@@ -26,6 +27,8 @@ const Operators = ({numberPassed,updateDisplay}) =>{
   const handleClick = () =>{
     updateDisplay(operator)
   }
+
+  //vamos asignando los operadores a sus lugares
   if(numberPassed === 2){
 
     operator = "x";
@@ -42,7 +45,7 @@ const Operators = ({numberPassed,updateDisplay}) =>{
 
   }else if(numberPassed == "="){
     operator = "-";
-    return <button className='operator'>-</button>
+    return <button className='operator' onClick={handleClick}>-</button>
   }
 
   return null
@@ -54,6 +57,7 @@ const Operators = ({numberPassed,updateDisplay}) =>{
 
 const keys = Array(12).fill().map((__,index) => {
 
+  //si el numero de indice es 10 o 11 tendra los siguientes valores sino,su valor sera igual al de su indice
   if(index == 10)return "."
   else if(index == 11) return "="
 
@@ -65,7 +69,7 @@ function App() {
 
   const showDisplay = (numSelected) =>{
 
-    number += String(numSelected);
+    number += String(numSelected); //juntamos los numeros que vamos seleccionando con los botones
 
     setNumber(number)
 
@@ -76,19 +80,37 @@ function App() {
   const showResult = () =>{
 
     let numbers = [];
+    let newNumber = number;
 
+    //vemos si el caracter esta incluido en el string
     if(number.includes("x")){
       
       numbers = number.split("x");
 
-      let newNumber = numbers[0] * numbers[1];
+      newNumber = numbers[0] * numbers[1];
 
-      
-      console.log(numbers)
-      setNumber(newNumber)
+    }else if(number.includes("+")){
 
-      setResult(newNumber)
+      numbers = number.split("+");
+
+      newNumber = parseInt((numbers[0])) + parseInt(numbers[1]);
+
+    }else if(number.includes("-")){
+
+      numbers = number.split("-");
+
+      newNumber = parseInt((numbers[0])) - parseInt(numbers[1]);
+
+    }else if(number.includes("/")){
+
+      numbers = number.split("/");
+
+      newNumber = parseInt((numbers[0])) / parseInt(numbers[1]);
     }
+
+    setNumber(newNumber)
+
+    setResult(newNumber)
   }
 
   const [result,setResult] = useState("0")
