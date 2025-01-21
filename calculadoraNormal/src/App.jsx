@@ -93,19 +93,19 @@ function App() {
 
       numbers = number.split("+");
 
-      newNumber = parseInt((numbers[0])) + parseInt(numbers[1]);
+      newNumber = parseFloat((numbers[0])) + parseFloat(numbers[1]);
 
     }else if(number.includes("-")){
 
       numbers = number.split("-");
 
-      newNumber = parseInt((numbers[0])) - parseInt(numbers[1]);
+      newNumber = parseFloat((numbers[0])) - parseFloat(numbers[1]);
 
     }else if(number.includes("/")){
 
       numbers = number.split("/");
 
-      newNumber = parseInt((numbers[0])) / parseInt(numbers[1]);
+      newNumber = parseFloat((numbers[0])) / parseFloat(numbers[1]);
     }
 
     setNumber(newNumber)
