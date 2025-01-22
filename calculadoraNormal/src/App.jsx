@@ -52,20 +52,38 @@ const Operators = ({numberPassed,updateDisplay}) =>{
 
 }
 
-const Deleter = ({drop}) =>{
+const Deleter = ({drop,dropAll}) =>{
 
-  const handleClick = () =>{
+  const handleClickDelete = () =>{
 
     drop()
 
   }
 
+  const handleClickDeleteAll = () =>{
+    dropAll();
+  }
+
   return (
 
-    <button className="delete" onClick={handleClick}
-            type="button" id="calc_back" aria-label="retroceder 1"><svg xmlns="http://www.w3.org/2000/svg"
-            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+    <>
+    
+    <button className="delete" onClick={handleClickDelete}
+            type="button" id="calc_back"><svg xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24"  fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
             ><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path><line x1="18" y1="9" x2="12" y2="15"></line><line x1="12" y1="9" x2="18" y2="15"></line></svg></button>
+    
+
+    <button className='delete' onClick={handleClickDeleteAll}  type="button" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+    fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
+      <polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+      <line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>
+    
+    
+    
+    </>
+    
+    
 
   )
 }
@@ -85,6 +103,15 @@ const keys = Array(12).fill().map((__,index) => {
 
 function App() {
 
+  const [result,setResult] = useState("0")
+  let [number,setNumber] = useState("")
+
+  const dropAll = () =>{
+
+    setResult(0)
+    setNumber("")
+  }
+
   const drop = () =>{
 
     let stringNumber ="";
@@ -97,15 +124,6 @@ function App() {
     
     list.pop();
     
-    // for(let number of list){
-
-    //   if(number == numberEleminated){
-
-    //     list.drop(number)
-
-
-    //   }
-    // }
     const lastNumber = list.join("")
 
     setNumber(lastNumber)
@@ -160,9 +178,6 @@ function App() {
     setResult(newNumber)
   }
 
-  const [result,setResult] = useState("0")
-  let [number,setNumber] = useState("")
-
   return (
     <>
     <div className="calculator">
@@ -181,7 +196,7 @@ function App() {
 
             { index === "=" &&
 
-            <Deleter drop={drop}></Deleter>
+            <Deleter drop={drop} dropAll={dropAll}></Deleter>
 
 
             }

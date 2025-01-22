@@ -50,22 +50,6 @@ button:hover {
   background: #0056b3;
 }
 
-button.clear {
-  background: #ff5f5f;
-}
-
-button.clear:hover {
-  background: #d94040;
-}
-
-button.equal {
-  background: #28a745;
-}
-
-button.equal:hover {
-  background: #1e7e34;
-}
-
 .number{
   background-color: black;
 }
@@ -74,6 +58,14 @@ button.equal:hover {
   background-color: #28a745;
 }
 
+.operator:hover{
+  background: #1e7e34;
+}
+
 .delete{
   background-color: red;
+}
+
+.delete:hover{
+  background: #d94040ea;
 }
