@@ -1,4 +1,7 @@
 import PropTypes from "prop-types"
+
+//esta funcion creara los botones
+// parametros: le pasaremos dos funciones: updateDisplay(actualiza el display de la calculadora) y showresult(muestra el resultado de la cuenta)
 export const BottonNumbers = ({children,updateDisplay,showResult}) => {
 
     const handleClick = () =>{

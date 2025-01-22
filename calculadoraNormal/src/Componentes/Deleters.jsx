@@ -1,12 +1,17 @@
 import PropTypes from "prop-types"
+
+//esta funcion creara dos btones especiales en donde borrara un numero o todos los numeros
+//parametros: tendremos dos funciones como parametro y lo usaremos para eliminar uno o todos los numeros
 export const Deleter = ({drop,dropAll}) =>{
 
+    //para borrar uno
     const handleClickDelete = () =>{
 
     drop()
 
     }
 
+    //para borrar todo
     const handleClickDeleteAll = () =>{
     dropAll();
     }

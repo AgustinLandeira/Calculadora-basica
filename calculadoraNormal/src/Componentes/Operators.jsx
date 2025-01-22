@@ -1,10 +1,12 @@
 import PropTypes from "prop-types"
 
+//esta funcion validara los operadores 
+// parametros: le pasamos el indice del array como numero y creara los operadores
 export const Operators = ({numberPassed,updateDisplay}) =>{
 
     let operator = "";
 
-    const handleClick = () =>{
+    const handleClick = () =>{//hara la cuenta
         updateDisplay(operator)
     }
 
