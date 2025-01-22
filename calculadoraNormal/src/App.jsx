@@ -10,7 +10,7 @@ const BottonNumbers = ({children,updateDisplay,showResult}) => {
 
   const click = () =>{
 
-    showResult() 
+    showResult()
   }
 
   //si el children tiene este valor = este boton tendra otra funcion(mostrara el resultado)
@@ -52,6 +52,24 @@ const Operators = ({numberPassed,updateDisplay}) =>{
 
 }
 
+const Deleter = ({drop}) =>{
+
+  const handleClick = () =>{
+
+    drop()
+
+  }
+
+  return (
+
+    <button className="delete" onClick={handleClick}
+            type="button" id="calc_back" aria-label="retroceder 1"><svg xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+            ><path d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"></path><line x1="18" y1="9" x2="12" y2="15"></line><line x1="12" y1="9" x2="18" y2="15"></line></svg></button>
+
+  )
+}
+
 //creamos nueve espacios vacios y despues le decimos que lo vamos a rellenar
 //.map((_, index) => index) usamos el segundo param del map para usar sus indices como valores
 
@@ -67,6 +85,35 @@ const keys = Array(12).fill().map((__,index) => {
 
 function App() {
 
+  const drop = () =>{
+
+    let stringNumber ="";
+
+    if(number != String){
+      stringNumber = String(number)
+    } else{  stringNumber = number   }
+    
+    const list = stringNumber.split("")
+    
+    list.pop();
+    
+    // for(let number of list){
+
+    //   if(number == numberEleminated){
+
+    //     list.drop(number)
+
+
+    //   }
+    // }
+    const lastNumber = list.join("")
+
+    setNumber(lastNumber)
+
+    setResult(lastNumber)
+
+  }
+
   const showDisplay = (numSelected) =>{
 
     number += String(numSelected); //juntamos los numeros que vamos seleccionando con los botones
@@ -74,7 +121,7 @@ function App() {
     setNumber(number)
 
     setResult(number)
-    
+
   }
 
   const showResult = () =>{
@@ -84,7 +131,7 @@ function App() {
 
     //vemos si el caracter esta incluido en el string
     if(number.includes("x")){
-      
+
       numbers = number.split("x");
 
       newNumber = numbers[0] * numbers[1];
@@ -131,18 +178,25 @@ function App() {
 
             <BottonNumbers className="Number" key={index} updateDisplay={showDisplay} showResult={showResult}>{index}</BottonNumbers>
             <Operators numberPassed={index} updateDisplay={showDisplay} ></Operators>
-          
+
+            { index === "=" &&
+
+            <Deleter drop={drop}></Deleter>
+
+
+            }
+
           </>
           )
-          
-          
+
+
         })
       }
 
       </div>
 
     </div>
-      
+
     </>
   )
 }

@@ -73,3 +73,7 @@ button.equal:hover {
 .operator{
   background-color: #28a745;
 }
+
+.delete{
+  background-color: red;
+}
