@@ -96,19 +96,28 @@ function App() {
 
       numbers = number.split("/");
 
-      newNumber = parseFloat((numbers[0])) / parseFloat(numbers[1]);
+      if(numbers[1] == 0){
+        newNumber = 0
+
+      }else{
+        newNumber = parseFloat((numbers[0])) / parseFloat(numbers[1]);
+      }
+
+      
     }
 
     setNumber(newNumber)
 
     setResult(newNumber)
+
+    
   }
 
   return (
     <>
     <div className="calculator">
 
-      <input type="text" value={result} className='display' />
+      <input type="text" value={result} className='display'  />
       <div className='buttons'>
 
       {
@@ -134,6 +143,8 @@ function App() {
       }
 
       </div>
+
+      
 
     </div>
 
